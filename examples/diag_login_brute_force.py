@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # encoding: utf-8
 # pysap - Python library for crafting SAP's network protocols packets
 #
@@ -19,11 +19,12 @@
 
 # Standard imports
 import logging
-from string import letters
+from string import ascii_letters as letters
 from random import choice
 from argparse import ArgumentParser
 # External imports
 from scapy.config import conf
+conf.max_list_count = 1000
 from scapy.packet import bind_layers
 # Custom imports
 import pysap

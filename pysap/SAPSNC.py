@@ -139,6 +139,6 @@ def wrap_snc(s, offset, data):
         snc_frame.data = data
         snc_frame.data_length = len(data)
         snc_frame_length = snc_frame.header_length + snc_frame.token_length + snc_frame.data_length
-        s = s[:offset] + str(snc_frame)[:snc_frame_length]
+        s = s[:offset] + bytes(snc_frame)[:snc_frame_length]
 
     return s

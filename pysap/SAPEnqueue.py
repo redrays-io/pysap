@@ -242,14 +242,14 @@ class SAPEnqueueStreamSocket(SAPRoutedStreamSocket):
         if SAPEnqueue in packet and packet[SAPEnqueue].more_frags:
             log_sapenqueue.debug("Received Enqueue fragmented packet")
 
-            head = str(packet[SAPEnqueue])[:20]
-            data = str(packet[SAPEnqueue])[20:]
+            head = bytes(packet[SAPEnqueue])[:20]
+            data = bytes(packet[SAPEnqueue])[20:]
             total_length = packet[SAPEnqueue].len - 20
             recvd_length = len(packet[SAPEnqueue]) - 20
             log_sapenqueue.debug("Received %d up to %d bytes", recvd_length, total_length)
             while recvd_length < total_length and packet[SAPEnqueue].more_frags == 1:
                 response = SAPRoutedStreamSocket.recv(self)[SAPEnqueue]
-                data += str(response)[20:]
+                data += bytes(response)[20:]
                 recvd_length += len(response) - 20
                 log_sapenqueue.debug("Received %d up to %d bytes", recvd_length, total_length)
 
